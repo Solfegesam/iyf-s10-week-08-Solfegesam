@@ -1,83 +1,48 @@
 import { useState } from "react";
-import Button from "../ui/Button";
-import Input from "../ui/Input";
-import Card from "../ui/Card";
-import theme from "../../styles/theme";
 
-function CreatePost({ onAddPost }) {
+function CreatePost({ addPost }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const submit = (e) => {
     e.preventDefault();
 
-    if (!title.trim() || !content.trim()) {
-      setError("Both fields are required.");
-      return;
-    }
+    if (!title || !content) return;
 
-    onAddPost({
+    const newPost = {
       id: Date.now(),
       title,
       content,
       author: "You",
       likes: 0,
-    });
+    };
+
+    addPost(newPost);
 
     setTitle("");
     setContent("");
-    setError("");
   };
 
   return (
-    <Card>
-      <h3 style={{ marginBottom: theme.spacing.sm }}>
-        Create Post
-      </h3>
+    <form onSubmit={submit} style={{ marginBottom: "20px" }}>
+      <h3>Create Post</h3>
 
-      {error && (
-        <p style={{ color: theme.colors.danger }}>
-          {error}
-        </p>
-      )}
+      <input
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        style={{ display: "block", marginBottom: "10px" }}
+      />
 
-      <form onSubmit={handleSubmit}>
-        <Input
-          placeholder="Post title"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-            setError("");
-          }}
-        />
+      <textarea
+        placeholder="Content"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        style={{ display: "block", marginBottom: "10px" }}
+      />
 
-        <textarea
-          placeholder="Write content..."
-          value={content}
-          onChange={(e) => {
-            setContent(e.target.value);
-            setError("");
-          }}
-          rows="5"
-          style={{
-            width: "100%",
-            padding: theme.spacing.sm,
-            borderRadius: theme.radius.sm,
-            border: `1px solid ${theme.colors.border}`,
-            marginBottom: theme.spacing.sm,
-          }}
-        />
-
-        <Button
-          type="submit"
-          variant="primary"
-          disabled={!title.trim() || !content.trim()}
-        >
-          Post
-        </Button>
-      </form>
-    </Card>
+      <button type="submit">Post</button>
+    </form>
   );
 }
 

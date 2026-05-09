@@ -1,19 +1,24 @@
+import { useTheme } from "../../context/ThemeContext";
+
 function Header() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <header
       style={{
-        padding: "16px",
-        borderBottom: "1px solid #ddd",
-        marginBottom: "20px",
+        padding: "16px 20px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        background: theme.colors.card,
+        borderBottom: `1px solid ${theme.colors.border}`,
       }}
     >
-      <h1>CommunityHub</h1>
+      <h2 style={{ margin: 0 }}>CommunityHub</h2>
 
-      <nav style={{ display: "flex", gap: "15px" }}>
-        <a href="#">Home</a>
-        <a href="#">Posts</a>
-        <a href="#">About</a>
-      </nav>
+      <button onClick={toggleTheme}>
+        {theme.mode === "light" ? "🌙 Dark" : "☀️ Light"}
+      </button>
     </header>
   );
 }

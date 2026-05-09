@@ -1,39 +1,33 @@
-import Card from "../ui/Card";
-import Button from "../ui/Button";
-import theme from "../../styles/theme";
+import { useTheme } from "../../context/ThemeContext";
 
 function PostCard({ post, onLike, onDelete }) {
+  const { theme } = useTheme();
+
   return (
-    <Card>
-      <h3 style={{ marginBottom: theme.spacing.xs }}>
-        {post.title}
-      </h3>
+    <div
+      style={{
+        padding: "16px",
+        marginBottom: "12px",
+        borderRadius: "10px",
+        background: theme.colors.card,
+        border: `1px solid ${theme.colors.border}`,
+      }}
+    >
+      <h3>{post.title}</h3>
+      <p style={{ color: theme.colors.muted }}>{post.content}</p>
 
-      <p style={{ color: theme.colors.muted }}>
-        {post.content}
-      </p>
+      <small>By {post.author}</small>
 
-      <small style={{ display: "block", marginTop: "8px" }}>
-        By {post.author}
-      </small>
-
-      <div
-        style={{
-          display: "flex",
-          gap: theme.spacing.sm,
-          marginTop: theme.spacing.md,
-          flexWrap: "wrap",
-        }}
-      >
-        <Button onClick={() => onLike(post.id)} variant="default">
+      <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
+        <button onClick={() => onLike(post.id)}>
           ❤️ Like ({post.likes})
-        </Button>
+        </button>
 
-        <Button onClick={() => onDelete(post.id)} variant="danger">
+        <button onClick={() => onDelete(post.id)}>
           Delete
-        </Button>
+        </button>
       </div>
-    </Card>
+    </div>
   );
 }
 

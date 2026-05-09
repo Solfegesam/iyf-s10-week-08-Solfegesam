@@ -10,33 +10,32 @@ function Button({
 }) {
   const base = {
     borderRadius: theme.radius.sm,
-    fontWeight: 500,
+    fontWeight: 600,
     cursor: disabled ? "not-allowed" : "pointer",
+    transition: "0.2s",
     opacity: disabled ? 0.6 : 1,
   };
 
   const variants = {
     default: {
-      background: theme.colors.white,
+      background: "#fff",
       border: `1px solid ${theme.colors.border}`,
       color: theme.colors.text,
     },
     primary: {
       background: theme.colors.primary,
-      border: "none",
-      color: theme.colors.white,
+      color: "#fff",
     },
     danger: {
       background: theme.colors.danger,
-      border: "none",
-      color: theme.colors.white,
+      color: "#fff",
     },
   };
 
   const sizes = {
     sm: { padding: "6px 10px", fontSize: "12px" },
-    md: { padding: "8px 14px", fontSize: "14px" },
-    lg: { padding: "10px 16px", fontSize: "16px" },
+    md: { padding: "9px 14px", fontSize: "14px" },
+    lg: { padding: "12px 18px", fontSize: "16px" },
   };
 
   return (
@@ -48,6 +47,20 @@ function Button({
         ...base,
         ...variants[variant],
         ...sizes[size],
+      }}
+      onMouseOver={(e) => {
+        if (disabled) return;
+        if (variant === "primary")
+          e.target.style.background = theme.colors.primaryHover;
+        if (variant === "danger")
+          e.target.style.background = theme.colors.dangerHover;
+      }}
+      onMouseOut={(e) => {
+        if (disabled) return;
+        if (variant === "primary")
+          e.target.style.background = theme.colors.primary;
+        if (variant === "danger")
+          e.target.style.background = theme.colors.danger;
       }}
     >
       {children}

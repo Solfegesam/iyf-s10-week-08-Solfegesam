@@ -1,7 +1,7 @@
 import PostCard from "./PostCard";
 
 function PostList({ posts, onLike, onDelete }) {
-  if (!posts || posts.length === 0) {
+  if (posts.length === 0) {
     return <p>No posts yet. Be the first to post.</p>;
   }
 

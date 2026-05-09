@@ -1,26 +1,31 @@
-const theme = {
+const lightTheme = {
+  mode: "light",
   colors: {
-    primary: "#2563eb",
-    danger: "#dc2626",
+    background: "#f3f4f6",
+    card: "#ffffff",
     text: "#111827",
     muted: "#6b7280",
     border: "#e5e7eb",
-    background: "#f6f7fb",
-    white: "#ffffff",
-  },
-
-  spacing: {
-    xs: "4px",
-    sm: "8px",
-    md: "12px",
-    lg: "16px",
-    xl: "24px",
-  },
-
-  radius: {
-    sm: "6px",
-    md: "10px",
+    primary: "#2563eb",
+    primaryHover: "#1d4ed8",
+    danger: "#dc2626",
+    dangerHover: "#b91c1c",
   },
 };
 
-export default theme;
+const darkTheme = {
+  mode: "dark",
+  colors: {
+    background: "#0f172a",
+    card: "#1e293b",
+    text: "#f8fafc",
+    muted: "#94a3b8",
+    border: "#334155",
+    primary: "#3b82f6",
+    primaryHover: "#2563eb",
+    danger: "#ef4444",
+    dangerHover: "#dc2626",
+  },
+};
+
+export { lightTheme, darkTheme };

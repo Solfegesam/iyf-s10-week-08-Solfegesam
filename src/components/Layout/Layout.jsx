@@ -12,48 +12,20 @@ function Layout({ children, sidebar }) {
         style={{
           maxWidth: "1100px",
           margin: "0 auto",
-          padding: theme.spacing.lg,
+          padding: theme.spacing.xl,
         }}
       >
-        {/* Responsive container */}
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            gap: theme.spacing.lg,
+            gap: theme.spacing.xl,
+            alignItems: "flex-start",
+            flexWrap: "wrap",
           }}
         >
-          {/* Main layout grid */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: theme.spacing.lg,
+          <main style={{ flex: "2 1 600px" }}>{sidebar?.main}</main>
 
-              // RESPONSIVE BREAKPOINT
-              flexWrap: "wrap",
-            }}
-          >
-            {/* Main content */}
-            <main
-              style={{
-                flex: "2 1 600px",
-                minWidth: "280px",
-              }}
-            >
-              {sidebar?.main}
-            </main>
-
-            {/* Sidebar */}
-            <aside
-              style={{
-                flex: "1 1 250px",
-                minWidth: "220px",
-              }}
-            >
-              {sidebar?.side}
-            </aside>
-          </div>
+          <aside style={{ flex: "1 1 260px" }}>{sidebar?.side}</aside>
         </div>
       </div>
     </div>

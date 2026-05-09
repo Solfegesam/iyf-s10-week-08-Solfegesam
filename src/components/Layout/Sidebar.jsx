@@ -1,25 +1,24 @@
+import { useTheme } from "../../context/ThemeContext";
+
 function Sidebar() {
+  const { theme } = useTheme();
+
   return (
     <div
       style={{
-        border: "1px solid #e5e5e5",
-        borderRadius: "10px",
         padding: "16px",
-        backgroundColor: "#fafafa",
+        background: theme.colors.card,
+        border: `1px solid ${theme.colors.border}`,
+        borderRadius: "10px",
       }}
     >
-      <h3>About CommunityHub</h3>
+      <h3>CommunityHub</h3>
+      <p>Navigation</p>
 
-      <p style={{ fontSize: "14px", color: "#555" }}>
-        A React-based community platform for posts, interaction, and learning.
-      </p>
-
-      <h4>Topics</h4>
-
-      <ul style={{ paddingLeft: "18px", color: "#555" }}>
-        <li>React</li>
-        <li>State Management</li>
-        <li>Frontend UI</li>
+      <ul style={{ paddingLeft: "16px" }}>
+        <li>Home</li>
+        <li>Posts</li>
+        <li>About</li>
       </ul>
     </div>
   );

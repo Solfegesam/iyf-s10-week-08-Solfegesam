@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useTheme } from "./context/ThemeContext";
 
 import Header from "./components/Layout/Header";
-import Footer from "./components/Layout/Footer";
-import Sidebar from "./components/Layout/Sidebar";
-import Layout from "./components/Layout/Layout";
-
 import PostList from "./components/Post/PostList";
 import CreatePost from "./components/Post/CreatePost";
-
-import postsData from "./data/posts";
+import Sidebar from "./components/Layout/Sidebar";
 
 function App() {
-  const [posts, setPosts] = useState(() => {
-    const saved = localStorage.getItem("community-posts");
-    return saved ? JSON.parse(saved) : postsData;
-  });
+  const { theme } = useTheme();
 
-  useEffect(() => {
-    localStorage.setItem("community-posts", JSON.stringify(posts));
-  }, [posts]);
+  const [posts, setPosts] = useState([
+    {
+      id: 1,
+      title: "Welcome to CommunityHub",
+      content: "This is your first post.",
+      author: "Admin",
+      likes: 2,
+    },
+  ]);
 
   const addPost = (post) => {
     setPosts([post, ...posts]);
@@ -26,43 +25,49 @@ function App() {
 
   const likePost = (id) => {
     setPosts(
-      posts.map((post) =>
-        post.id === id
-          ? { ...post, likes: post.likes + 1 }
-          : post
+      posts.map((p) =>
+        p.id === id ? { ...p, likes: p.likes + 1 } : p
       )
     );
   };
 
   const deletePost = (id) => {
-    setPosts(posts.filter((post) => post.id !== id));
+    setPosts(posts.filter((p) => p.id !== id));
   };
 
   return (
-    <>
+    <div
+      style={{
+        background: theme.colors.background,
+        minHeight: "100vh",
+        color: theme.colors.text,
+      }}
+    >
       <Header />
 
-      <Layout
-        sidebar={{
-          main: (
-            <>
-              <h2>Community Posts</h2>
-
-              <CreatePost onAddPost={addPost} />
-
-              <PostList
-                posts={posts}
-                onLike={likePost}
-                onDelete={deletePost}
-              />
-            </>
-          ),
-          side: <Sidebar />,
+      <div
+        style={{
+          display: "flex",
+          gap: "20px",
+          maxWidth: "1100px",
+          margin: "0 auto",
+          padding: "20px",
         }}
-      />
+      >
+        <div style={{ flex: 2 }}>
+          <CreatePost addPost={addPost} />
+          <PostList
+            posts={posts}
+            onLike={likePost}
+            onDelete={deletePost}
+          />
+        </div>
 
-      <Footer />
-    </>
+        <div style={{ flex: 1 }}>
+          <Sidebar />
+        </div>
+      </div>
+    </div>
   );
 }
 
