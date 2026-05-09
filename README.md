@@ -1,3 +1,7 @@
+<p align="center">
+ <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/62935a80-4fce-4c74-bdff-a9dd6ead8465" />
+</p>
+
 # CommunityHub (Week 8 - React Fundamentals)
 
 A modern React-based community posting application built using Vite.  
@@ -150,5 +154,4 @@ Week 8 React Fundamentals Project - IYF Season 10
 This project is for educational purposes.
 
 ```
-o into **job-ready presentation level**.
-```
+
